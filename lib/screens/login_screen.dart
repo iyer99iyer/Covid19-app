@@ -40,15 +40,15 @@ class _LoginScreenState extends State<LoginScreen> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: <Widget>[
-                  buildTextField('Email', (value) {
+                  BuildTextField('Email', (value) {
                     this.email = value;
-                  }),
+                  }, TextInputType.emailAddress),
                   SizedBox(
                     height: 20,
                   ),
-                  buildTextField('Password', (value) {
+                  BuildTextField('Password', (value) {
                     this.password = value;
-                  }),
+                  }, TextInputType.visiblePassword),
                   SizedBox(
                     height: 10,
                   ),
@@ -108,9 +108,20 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
+}
 
-  Widget buildTextField(String hintText, Function onChanged) {
+class BuildTextField extends StatelessWidget {
+  BuildTextField(this.hintText, this.onChanged, this.keyboardType);
+
+  String hintText;
+  Function onChanged;
+  TextInputType keyboardType;
+
+  @override
+  Widget build(BuildContext context) {
     return TextField(
+      autofocus: true,
+      keyboardType: keyboardType,
       onChanged: onChanged,
       cursorColor: kAccentColor,
       obscureText: hintText == 'Password' ? true : false,

@@ -44,33 +44,53 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: <Widget>[
-                  buildTextField('Name', Icons.perm_identity, (value) {
-                    this.name = value;
-                  }),
+                  BuildTextField(
+                    hintText: 'Name',
+                    icon: Icons.perm_identity,
+                    onChanged: (value) {
+                      this.name = value;
+                    },
+                    keyboardType: TextInputType.emailAddress,
+                  ),
                   SizedBox(
                     height: 20,
                   ),
-                  buildTextField('Phone number', Icons.phone, (value) {
-                    this.mobile = value;
-                  }),
+                  BuildTextField(
+                    hintText: 'Phone number',
+                    icon: Icons.phone,
+                    onChanged: (value) {
+                      this.mobile = value;
+                    },
+                    keyboardType: TextInputType.number,
+                  ),
                   SizedBox(
                     height: 10,
                   ),
                   SizedBox(
                     height: 20,
                   ),
-                  buildTextField('Email', Icons.email, (value) {
-                    this.email = value;
-                  }),
+                  BuildTextField(
+                    hintText: 'Email',
+                    icon: Icons.email,
+                    onChanged: (value) {
+                      this.email = value;
+                    },
+                    keyboardType: TextInputType.emailAddress,
+                  ),
                   SizedBox(
                     height: 10,
                   ),
                   SizedBox(
                     height: 20,
                   ),
-                  buildTextField('Password', Icons.lock, (value) {
-                    this.password = value;
-                  }),
+                  BuildTextField(
+                    hintText: 'Password',
+                    icon: Icons.lock,
+                    onChanged: (value) {
+                      this.password = value;
+                    },
+                    keyboardType: TextInputType.visiblePassword,
+                  ),
                   SizedBox(
                     height: 10,
                   ),
@@ -121,8 +141,18 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       ),
     );
   }
+}
 
-  Widget buildTextField(String hintText, IconData icon, Function onChanged) {
+class BuildTextField extends StatelessWidget {
+  BuildTextField({this.hintText, this.onChanged, this.icon, this.keyboardType});
+
+  String hintText;
+  Function onChanged;
+  TextInputType keyboardType;
+  IconData icon;
+
+  @override
+  Widget build(BuildContext context) {
     return TextField(
       onChanged: onChanged,
       cursorColor: kAccentColor,
