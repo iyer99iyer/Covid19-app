@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:test_indoor_app/constant.dart';
-import 'package:test_indoor_app/screens/registration_screen.dart';
+import 'package:test_indoor_app/screens/login_screen.dart';
 
-class LoginScreen extends StatefulWidget {
-  static String id = 'login_screen';
+class RegistrationScreen extends StatefulWidget {
+  static String id = 'registration_screen';
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _RegistrationScreenState createState() => _RegistrationScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegistrationScreenState extends State<RegistrationScreen> {
+  String name;
+  String mobile;
   String email;
   String password;
+
+  Function onchanged;
 
   @override
   Widget build(BuildContext context) {
@@ -40,27 +44,35 @@ class _LoginScreenState extends State<LoginScreen> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: <Widget>[
-                  buildTextField('Email', (value) {
-                    this.email = value;
+                  buildTextField('Name', Icons.perm_identity, (value) {
+                    this.name = value;
                   }),
                   SizedBox(
                     height: 20,
                   ),
-                  buildTextField('Password', (value) {
-                    this.password = value;
+                  buildTextField('Phone number', Icons.phone, (value) {
+                    this.mobile = value;
                   }),
                   SizedBox(
                     height: 10,
                   ),
                   SizedBox(
+                    height: 20,
+                  ),
+                  buildTextField('Email', Icons.email, (value) {
+                    this.email = value;
+                  }),
+                  SizedBox(
                     height: 10,
                   ),
-                  GestureDetector(
-                    onTap: () {},
-                    child: Text(
-                      'Forgot Password?',
-                      textAlign: TextAlign.end,
-                    ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  buildTextField('Password', Icons.lock, (value) {
+                    this.password = value;
+                  }),
+                  SizedBox(
+                    height: 10,
                   ),
                   SizedBox(
                     height: 20,
@@ -69,9 +81,10 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               GestureDetector(
                 onTap: () {
-                  print('$email $password');
+                  print(
+                      'name => $name \n phone => $mobile \n email => $email \n password => $password');
                 },
-                child: CustomButton(text: 'Login'),
+                child: CustomButton(text: 'Register'),
               ),
               SizedBox(
                 height: 20,
@@ -84,7 +97,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 100,
               ),
               Text(
-                'Not a member yet?',
+                'Already member?',
                 style: TextStyle(
                   fontSize: 18,
                   color: Colors.grey,
@@ -95,10 +108,10 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, RegistrationScreen.id);
+                  Navigator.pushNamed(context, LoginScreen.id);
                 },
                 child: Text(
-                  'Register',
+                  'Login',
                   style: TextStyle(fontSize: 24, color: kAccentColor),
                 ),
               )
@@ -109,7 +122,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget buildTextField(String hintText, Function onChanged) {
+  Widget buildTextField(String hintText, IconData icon, Function onChanged) {
     return TextField(
       onChanged: onChanged,
       cursorColor: kAccentColor,
@@ -119,7 +132,7 @@ class _LoginScreenState extends State<LoginScreen> {
         fillColor: Color(0xFFFBFAFF),
         filled: true,
         prefixIcon: Icon(
-          hintText == 'Password' ? Icons.lock : Icons.perm_identity,
+          icon,
         ),
         hintText: hintText,
         hintStyle: TextStyle(
