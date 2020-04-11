@@ -2,7 +2,9 @@
 
 A new Flutter application.
 
-## Getting Started
+This is the base project files for the COvid 19 project.
+
+## Get Started
 
 This project is a starting point for a Flutter application.
 
