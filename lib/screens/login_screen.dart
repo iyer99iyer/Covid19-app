@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_indoor_app/constant.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -9,74 +10,116 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        padding: EdgeInsets.only(top: 100.0, right: 20, left: 20, bottom: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Column(
-              children: <Widget>[
-                Image(
-                  image: AssetImage('images/logo.png'),
-                  width: 50,
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.only(top: 100.0, right: 20, left: 20, bottom: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Column(
+                children: <Widget>[
+                  Image(
+                    image: AssetImage('images/logo.png'),
+                    width: 60,
+                  ),
+                  Text(
+                    'Indoor',
+                    style: TextStyle(color: Colors.black54, fontSize: 30),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 40,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  buildTextField('Email'),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  buildTextField('Password'),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Text(
+                      'Forgot Password?',
+                      textAlign: TextAlign.end,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                ],
+              ),
+              GestureDetector(
+                onTap: () {},
+                child: CustomButton(text: 'Login'),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              GestureDetector(
+                onTap: () {},
+                child: CustomButton(text: 'Google'),
+              ),
+              SizedBox(
+                height: 100,
+              ),
+              Text(
+                'Not a member yet?',
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.grey,
                 ),
-                Text(
-                  'Indoor',
-                  style: TextStyle(color: Colors.black54, fontSize: 18),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              GestureDetector(
+                onTap: () {},
+                child: Text(
+                  'Register',
+                  style: TextStyle(fontSize: 24, color: kAccentColor),
                 ),
-              ],
-            ),
-            SizedBox(
-              height: 40,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: <Widget>[
-                buildTextField('Email'),
-                SizedBox(
-                  height: 20,
-                ),
-                buildTextField('Password'),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  'Forgot Password?',
-                  textAlign: TextAlign.end,
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-              ],
-            ),
-            CustomButton(text: 'Login')
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );
   }
 
   Widget buildTextField(String hintText) {
-    return Container(
-      color: Colors.black12,
-      child: TextField(
-        obscureText: hintText == 'Password' ? true : false,
-        decoration: InputDecoration(
-            prefixIcon:
-                Icon(hintText == 'Password' ? Icons.lock : Icons.account_box),
-            hintText: hintText,
-            hintStyle: TextStyle(
-              color: Colors.blueGrey,
-              fontSize: 18.0,
-            ),
-            border: OutlineInputBorder()),
+    return TextField(
+      cursorColor: kAccentColor,
+      obscureText: hintText == 'Password' ? true : false,
+      style: TextStyle(fontSize: 18),
+      decoration: InputDecoration(
+        fillColor: Color(0xFFFBFAFF),
+        filled: true,
+        hoverColor: kAccentColor,
+        // border: InputBorder.none,
+        focusColor: kAccentColor,
+        prefixIcon: Icon(
+          hintText == 'Password' ? Icons.lock : Icons.perm_identity,
+        ),
+        hintText: hintText,
+        hintStyle: TextStyle(
+          color: Colors.blueGrey,
+          fontSize: 18.0,
+        ),
       ),
     );
   }
 }
 
 class CustomButton extends StatelessWidget {
-  CustomButton({this.text});
+  CustomButton({
+    @required this.text,
+  });
 
   String text;
 
@@ -85,8 +128,8 @@ class CustomButton extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 150, vertical: 15),
       decoration: BoxDecoration(
-        color: Color(0xFF00CA9D),
-        borderRadius: BorderRadius.circular(20),
+        color: kAccentColor,
+        borderRadius: BorderRadius.circular(100),
       ),
       child: Text(
         text,
