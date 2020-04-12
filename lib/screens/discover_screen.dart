@@ -133,26 +133,31 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                                           snapshot.data[index].serviceType,
                                           textAlign: TextAlign.start,
                                           style: TextStyle(
-                                            fontSize: 24,
-                                            fontWeight: FontWeight.bold,
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.normal,
                                           ),
                                         ),
                                         Row(
                                           children: <Widget>[
                                             rating(snapshot.data[index].stars),
                                             Text(
-                                              '${snapshot.data[index].stars}/5.0',
+                                              '  ${snapshot.data[index].stars}/5.0',
                                               style: TextStyle(
-                                                  fontSize: 18,
+                                                  fontSize: 11,
                                                   color: Colors.grey),
                                             ),
-                                            SizedBox(
-                                              width: 20,
+                                            Text(
+                                              '  |  ',
+                                              style: TextStyle(
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w900,
+                                                color: Colors.grey,
+                                              ),
                                             ),
                                             Text(
                                               '${snapshot.data[index].distance.toString()} KM NEARBY',
                                               style: TextStyle(
-                                                  fontSize: 18,
+                                                  fontSize: 11,
                                                   color: Colors.grey),
                                             ),
                                           ],
@@ -188,12 +193,14 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
       starRating.add(Icon(
         Icons.star,
         color: kAccentColor,
+        size: 20,
       ));
     }
     for (var i = starRating.length; i < 5; i++) {
       starRating.add(Icon(
         Icons.star,
         color: Colors.grey,
+        size: 20,
       ));
     }
     return Row(

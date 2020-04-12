@@ -146,14 +146,15 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 class BuildTextField extends StatelessWidget {
   BuildTextField({this.hintText, this.onChanged, this.icon, this.keyboardType});
 
-  String hintText;
-  Function onChanged;
-  TextInputType keyboardType;
-  IconData icon;
+  final String hintText;
+  final Function onChanged;
+  final TextInputType keyboardType;
+  final IconData icon;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      keyboardType: keyboardType,
       onChanged: onChanged,
       cursorColor: kAccentColor,
       obscureText: hintText == 'Password' ? true : false,
@@ -179,12 +180,12 @@ class CustomButton extends StatelessWidget {
     @required this.text,
   });
 
-  String text;
+  final String text;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 150, vertical: 15),
+      padding: EdgeInsets.symmetric(horizontal: 70, vertical: 7),
       decoration: BoxDecoration(
         color: kAccentColor,
         borderRadius: BorderRadius.circular(100),
