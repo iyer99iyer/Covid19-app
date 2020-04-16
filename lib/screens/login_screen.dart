@@ -106,8 +106,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   'Register',
                   style: TextStyle(fontSize: 24, color: kAccentColor),
                 ),
-              )
+              ),
             ],
+            
           ),
         ),
       ),
