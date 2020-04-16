@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:test_indoor_app/constant.dart';
+import 'package:test_indoor_app/screens/discover_screen.dart';
 import 'package:test_indoor_app/screens/registration_screen.dart';
+
 
 class LoginScreen extends StatefulWidget {
   static String id = 'login_screen';
@@ -56,7 +58,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 10,
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      //Forgot Password
+                    },
                     child: Text(
                       'Forgot Password?',
                       textAlign: TextAlign.end,
@@ -70,6 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
               GestureDetector(
                 onTap: () {
                   print('$email $password');
+                  Navigator.pushNamed(context, DiscoverScreen.id);
                 },
                 child: CustomButton(text: 'Login'),
               ),
@@ -101,8 +106,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   'Register',
                   style: TextStyle(fontSize: 24, color: kAccentColor),
                 ),
-              )
+              ),
             ],
+            
           ),
         ),
       ),
@@ -113,9 +119,9 @@ class _LoginScreenState extends State<LoginScreen> {
 class BuildTextField extends StatelessWidget {
   BuildTextField(this.hintText, this.onChanged, this.keyboardType);
 
-  String hintText;
-  Function onChanged;
-  TextInputType keyboardType;
+  final String hintText;
+  final Function onChanged;
+  final TextInputType keyboardType;
 
   @override
   Widget build(BuildContext context) {
@@ -147,12 +153,12 @@ class CustomButton extends StatelessWidget {
     @required this.text,
   });
 
-  String text;
+  final String text;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 150, vertical: 15),
+      padding: EdgeInsets.symmetric(horizontal: 70, vertical: 7),
       decoration: BoxDecoration(
         color: kAccentColor,
         borderRadius: BorderRadius.circular(100),

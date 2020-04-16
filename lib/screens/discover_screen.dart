@@ -16,24 +16,33 @@ class DiscoverScreen extends StatefulWidget {
 
 class _DiscoverScreenState extends State<DiscoverScreen> {
   Future<List<Discover>> _getDiscover() async {
-    var data = await http
-        .get('https://my-json-server.typicode.com/typicode/demo/comments');
+    var data = await http.get(
+        'https://my-json-server.typicode.com/iyer99iyer/gridViewPaceholder/post#');
 
-    //print(data.body);
     var jsonData = json.decode(data.body);
 
     List<Discover> discoverItems = [];
 
-    for (var u in jsonData) {
-      Discover discoveritem = Discover(
-        index: u['index'],
-        serviceType: u['serviceType'],
-        distance: u['distance'],
-        stars: u['stars'],
-        picture: u['picture'],
-      );
-      //discoverItems.add(discoveritem);
-    }
+    Discover discover;
+
+    // for (var u in jsonData) {
+
+    //   discover = Discover(
+    //     index: u['index'],
+    //     serviceType: u['serviceType'],
+    //     distance: u['distance'],
+    //     stars: u['stars'],
+    //     picture: u['picture'],
+    //   );
+    //   discoverItems.add(discover);
+    //   print(u['index']);
+    //   //break;
+    //   // if(u['index']==4){
+    //   //   return discoverItems;
+    //   // }
+
+    // }
+    print(discoverItems.length);
 
     discoverItems.add(Discover(
         index: 0,
@@ -43,14 +52,14 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
         picture:
             'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg'));
     discoverItems.add(Discover(
-        index: 0,
+        index: 1,
         serviceType: 'Hospital Helpline',
         distance: 1.3,
         stars: 4.2,
         picture:
             'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg'));
     discoverItems.add(Discover(
-        index: 0,
+        index: 2,
         serviceType: 'Hospital Helpline',
         distance: 1.3,
         stars: 3.2,
@@ -109,6 +118,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                 );
               } else {
                 return ListView.builder(
+                  key: PageStorageKey("Left"),
                   itemCount: snapshot.data.length,
                   itemBuilder: (BuildContext context, int index) {
                     return Padding(
@@ -133,26 +143,31 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                                           snapshot.data[index].serviceType,
                                           textAlign: TextAlign.start,
                                           style: TextStyle(
-                                            fontSize: 24,
-                                            fontWeight: FontWeight.bold,
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.normal,
                                           ),
                                         ),
                                         Row(
                                           children: <Widget>[
                                             rating(snapshot.data[index].stars),
                                             Text(
-                                              '${snapshot.data[index].stars}/5.0',
+                                              '  ${snapshot.data[index].stars}/5.0',
                                               style: TextStyle(
-                                                  fontSize: 18,
+                                                  fontSize: 11,
                                                   color: Colors.grey),
                                             ),
-                                            SizedBox(
-                                              width: 20,
+                                            Text(
+                                              '  |  ',
+                                              style: TextStyle(
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w900,
+                                                color: Colors.grey,
+                                              ),
                                             ),
                                             Text(
                                               '${snapshot.data[index].distance.toString()} KM NEARBY',
                                               style: TextStyle(
-                                                  fontSize: 18,
+                                                  fontSize: 11,
                                                   color: Colors.grey),
                                             ),
                                           ],
@@ -188,12 +203,14 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
       starRating.add(Icon(
         Icons.star,
         color: kAccentColor,
+        size: 20,
       ));
     }
     for (var i = starRating.length; i < 5; i++) {
       starRating.add(Icon(
         Icons.star,
         color: Colors.grey,
+        size: 20,
       ));
     }
     return Row(
